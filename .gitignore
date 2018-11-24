@@ -1,7 +1,11 @@
 db.sqlite3
 __pycache__
 *.cpy
+geckodriver.log
+*/migrations/*
 
 # Virtual Studio Code
 .vscode
 
+# my stuff
+stuff/
