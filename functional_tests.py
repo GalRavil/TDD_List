@@ -29,7 +29,7 @@ class NewVisitorTest(unittest.TestCase):
         )
 
         # User1 types "By item1" into a test box
-        inputbox.send_keys('By item1')
+        inputbox.send_keys('Buy item1')
 
         # When user1 hits enter, the page updates, amd now the page lists has:
         # "1: By item1"
@@ -38,21 +38,25 @@ class NewVisitorTest(unittest.TestCase):
 
         table = self.browser.find_element_by_id('id_list_table')
         rows = table.find_elements_by_tag_name('tr')
-        self.assertTrue(
-            any(row.text == '1: Buy item1' for row in rows),
-            "New item did not appear in table"
-        )
+        self.assertIn('1: Buy item1', [row.text for row in rows])
         
         # There is still a text box inviting to add another item.
         # User1 enters "By item2" 
-        self.fail('Finish test after you sleep!')
-
+        inputbox = self.browser.find_element_by_id('id_new_item')
+        inputbox.send_keys('By item2')
+        inputbox.send_keys(Keys.ENTER)
+        time.sleep(1)
 
         # The page updates again, and now contains two items
+        table = self.browser.find_element_by_id('id_list_table')
+        rows = table.find_elements_by_tag_name('tr')
+        self.assertIn('1: Buy item1', [row.text for row in rows])
+        self.assertin('2: Buy item2', [row.text for row in rows])
 
-    # Check the unique URL
+        # Check the unique URL
+        self.fail('Finish test after you sleep!')
 
-    # User1 visits that URL to make sure the to-do list is still there
+        # User1 visits that URL to make sure the to-do list is still there
 
 
 if __name__ == '__main__':
