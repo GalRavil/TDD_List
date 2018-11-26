@@ -1,10 +1,10 @@
+from django.test import LiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
-import unittest
 
 
-class NewVisitorTest(unittest.TestCase):
+class NewVisitorTest(LiveServerTestCase):
     def setUp(self):
         self.browser = webdriver.Chrome()
     
@@ -18,7 +18,7 @@ class NewVisitorTest(unittest.TestCase):
 
     def test_can_start_list_and_retrieve_it_later(self):
         # User1 checks home page
-        self.browser.get('http://localhost:8000')
+        self.browser.get(self.live_server_url)
 
         # User1 notices the page title and header mention To-Do lists
         self.assertIn('To-Do', self.browser.title)
@@ -45,7 +45,7 @@ class NewVisitorTest(unittest.TestCase):
         # There is still a text box inviting to add another item.
         # User1 enters "By item2" 
         inputbox = self.browser.find_element_by_id('id_new_item')
-        inputbox.send_keys('By item2')
+        inputbox.send_keys('Buy item2')
         inputbox.send_keys(Keys.ENTER)
         time.sleep(1)
 
@@ -58,7 +58,4 @@ class NewVisitorTest(unittest.TestCase):
         self.fail('Finish test after you sleep!')
 
         # User1 visits that URL to make sure the to-do list is still there
-
-
-if __name__ == '__main__':
-    unittest.main(warnings='ignore')    
+    
