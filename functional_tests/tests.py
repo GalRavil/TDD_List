@@ -102,5 +102,5 @@ class NewVisitorTest(LiveServerTestCase):
 
         # Again, there is no trace of User1's list
         page_text = self.browser.find_element_by_tag_name('body').text
-        self.assertNotIn('Buy another stuff')
+        self.assertNotIn('Buy another stuff', page_text)
         self.assertIn('Buy milk', page_text)
