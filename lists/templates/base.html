@@ -4,20 +4,22 @@
     <title>To-Do lists</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="/static/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="/static/base.css" rel="stylesheet">
+
   </head>
 
   <body>
     <div class="container">
       
       <div class="row">
-        <div class="col">
+        <div class="col jumbotron">
           <div class="text-center">
 
             <h1>{% block header_text %}{% endblock %}</h1>
 
             <form method="POST" action="{% block form_action %}{% endblock %}">
               <input name="item_text" type="text" id="id_new_item" 
-                placeholder="Enter a to-do item">
+                class="form-control input-lg" placeholder="Enter a to-do item">
               {% csrf_token %}
             </form>
 
