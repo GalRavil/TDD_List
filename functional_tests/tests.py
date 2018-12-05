@@ -3,12 +3,14 @@ from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.common.keys import Keys
 import time
+from unittest import skip
 
 
 MAX_WAIT = 10
 
 
-class NewVisitorTest(StaticLiveServerTestCase):
+class FunctionalTest(StaticLiveServerTestCase):
+
     def setUp(self):
         self.browser = webdriver.Chrome()
     
@@ -29,6 +31,9 @@ class NewVisitorTest(StaticLiveServerTestCase):
                     raise e
                 time.sleep(0.5)
 
+
+class NewVisitorTest(FunctionalTest):
+    
     def test_can_start_list_for_one_user(self):
         # User1 checks home page
         self.browser.get(self.live_server_url)
@@ -107,7 +112,9 @@ class NewVisitorTest(StaticLiveServerTestCase):
         self.assertIn('Buy milk', page_text)
 
 
-    def test_layout_and_style(self):
+class LayoutAndStylingTest(FunctionalTest):
+    
+    def test_layout_and_styling(self):
         self.browser.get(self.live_server_url)
         self.browser.set_window_size(1024, 768)
 
@@ -128,3 +135,22 @@ class NewVisitorTest(StaticLiveServerTestCase):
             512,
             delta=10
         )
+
+
+class ItemValidationTest(FunctionalTest):
+    @skip
+    def test_cannot_add_empty_list_items(self):
+        # User goes to the home page and accidentally tries to submit
+        # an empty list item - hits Enter on the empty input box
+
+        # The home page refreshes and there is an erroe message saying
+        # that list items cannot be blank
+
+        # User tries again with some text for the item, which not works
+
+        # Persistently, User tries to submit a second blank list item
+
+        # User recerives a similar warning on the list page
+
+        # And finally User decides to correct it by filling some text in
+        self.fail('write me later =(')
