@@ -5,7 +5,6 @@ from .base import FunctionalTest
 
 
 class ItemValidationTest(FunctionalTest):
-    # @skip
     def test_cannot_add_empty_list_items(self):
         # User goes to the home page and accidentally tries to submit
         # an empty list item - hits Enter on the empty input box
