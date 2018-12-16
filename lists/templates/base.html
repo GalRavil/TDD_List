@@ -21,10 +21,8 @@
               {{ form.text }}
               {% csrf_token %}
               
-              {% if error %}
-                <div class="invalid-feedback">
-                  {{ error }}
-                </div>
+              {% if form.error %}
+                <div class="invalid-feedback">{{ form.text.errors }}</div>
               {% endif %}
             </form>
 
